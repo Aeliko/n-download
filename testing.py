@@ -57,10 +57,14 @@ try:
             os.makedirs('c:/Internet Explorer/' + folder, exist_ok=True)
 
             # Create json in folder for "metadata"
-            with open(
-                    'c:/Internet Explorer/' + folder + '/' + folder + '.json',
-                    "w") as out_file:
-                json.dump(atrs, out_file)
+            # Add encoding to save text correctly
+            # https://stackoverflow.com/questions/46080224/convert-python-escaped-unicode-sequences-to-utf-8
+            with open('c:/Internet Explorer/' + folder + '/' + folder +
+                      '.json',
+                      "w",
+                      encoding='utf-8') as out_file:
+                # Add ensure_ascii=False to save text correctly
+                json.dump(atrs, out_file, ensure_ascii=False)
 
             # Save image
             for page in range(1, pages + 1):
